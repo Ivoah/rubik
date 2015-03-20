@@ -202,12 +202,16 @@ One:
     cp $32
     kjp(z, DoRow3Left)  ;321
     ld b, 1
-    jr SaveKey
+    kjp(SaveKey)
 
 Two:
     ld a, d
     cp $85
     kjp(z, DoCol2Down)  ;852
+    cp $63
+    kjp(z, DoRotateClockwise) ;632
+    cp $41
+    kjp(z, DoRotateCounterClockwise) ;412
     ld b, 2
     jr SaveKey
 
@@ -224,6 +228,10 @@ Four:
     ld a, d
     cp $65
     kjp(z, DoRow2Left)  ;654
+    cp $21
+    kjp(z, DoRotateClockwise) ;214
+    cp $87
+    kjp(z, DoRotateCounterClockwise) ;874
     ld b, 4
     jr SaveKey
 
@@ -236,6 +244,10 @@ Six:
     ld a, d
     cp $45
     kjp(z, DoRow2Right)  ;456
+    cp $89
+    kjp(z, DoRotateClockwise) ;896
+    cp $23
+    kjp(z, DoRotateCounterClockwise) ;236
     ld b, 6
     jr SaveKey
 
@@ -252,6 +264,10 @@ Eight:
     ld a, d
     cp $25
     kjp(z, DoCol2Up)  ;258
+    cp $47
+    kjp(z, DoRotateClockwise) ;478
+    cp $69
+    kjp(z, DoRotateCounterClockwise) ;698
     ld b, 8
     jr SaveKey
 
@@ -279,6 +295,24 @@ SaveKey:
     ld d, a
 SameKey:
     kjp(KeyLoop)
+
+DoRotateClockwise:
+    kcall(DoCol1Down)
+    kcall(DoCol2Down)
+    kcall(DoCol3Down)
+    kcall(DoRow3Right)
+    kcall(DoCol1Up)
+    kcall(DoCol2Up)
+    kjp(DoCol3Up)
+
+DoRotateCounterClockwise:
+    kcall(DoCol1Down)
+    kcall(DoCol2Down)
+    kcall(DoCol3Down)
+    kcall(DoRow3Left)
+    kcall(DoCol1Up)
+    kcall(DoCol2Up)
+    jr DoCol3Up
 
 DoRow1Right:
     kld(hl, Row1Left)
