@@ -151,6 +151,7 @@ KeyLoop:
     ;halt
 
     corelib(appGetKey)
+    kcall(nz, MainLoop)
     cp kDown
     jr z, DownPressed
     cp kLeft
