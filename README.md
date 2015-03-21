@@ -9,6 +9,8 @@ The arrow keys are used to rotate the cube so you can look at it from different 
 
 You can also reset or quickly scramble the cube. Press MODE and the cube will be reset. Press XTθn and the cube will be scrambled - this beats randomly shuffling the cube around yourself.
 
+F1 returns to the castle and F5 opens the thread list
+
 Finally, press CLEAR to exit the program.
 
 ## Compiling
