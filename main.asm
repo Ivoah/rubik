@@ -148,10 +148,8 @@ MaskPatternLoop:
     push hl         ;so 'ret' retuns to MainLoop
 
 KeyLoop:
-    ;halt
-
     corelib(appGetKey)
-    kcall(nz, MainLoop)
+    ret nz
     cp kDown
     jr z, DownPressed
     cp kLeft
