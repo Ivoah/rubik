@@ -1,4 +1,5 @@
 #include "kernel.inc"
+#include "corelib.inc"
     .db "KEXC"
     .db KEXC_ENTRY_POINT
     .dw start
@@ -8,19 +9,23 @@
     .dw name
     .db KEXC_HEADER_END
 name:
-    .db "Rubik's Cube"
+    .db "Rubik's Cube",0
+corelib_path:
+    .db "/lib/core",0
 start:
+
+    kld(de, corelib_path)
+    pcall(loadLibrary)
 
     pcall(getLcdLock)
     pcall(getKeypadLock)
 
     pcall(allocScreenBuffer)
 
-
 MainLoop:
 
     pcall(clearBuffer)
-
+    
     kld(hl, RubikLines)
     ld b, 21
 
@@ -132,7 +137,7 @@ MaskPatternLoop:
 KeyLoop:
     halt
 
-    pcall(getKey)
+    corelib(appGetKey)
     cp kDown
     jr z, DownPressed
     cp kLeft
