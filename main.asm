@@ -135,7 +135,7 @@ MaskPatternLoop:
     push hl         ;so 'ret' retuns to MainLoop
 
 KeyLoop:
-    halt
+    ;halt
 
     corelib(appGetKey)
     cp kDown
@@ -180,22 +180,22 @@ KeyLoop:
     pop hl
     ret
 
-UpPressed:
+DownPressed:
     kcall(DoCol1Down)
     kcall(DoCol2Down)
     kjp(DoCol3Down)
 
-RightPressed:
+LeftPressed:
     kcall(DoRow1Left)
     kcall(DoRow2Left)
     kjp(DoRow3Left)
 
-LeftPressed:
+RightPressed:
     kcall(DoRow1Right)
     kcall(DoRow2Right)
     kjp(DoRow3Right)
 
-DownPressed:
+UpPressed:
     kcall(DoCol1Up)
     kcall(DoCol2Up)
     kjp(DoCol3Up)
