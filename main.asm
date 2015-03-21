@@ -25,6 +25,21 @@ start:
 MainLoop:
 
     pcall(clearBuffer)
+
+    kld(hl, CastleIcon)
+    ld de, $0038
+    ld b, 8
+    pcall(putSpriteOR)
+
+    kld(hl, ThreadsIcon)
+    ld de, $5838
+    ld b, 8
+    pcall(putSpriteOR)
+
+    ld c, 8
+    ld a, 96-9
+    ld l, 64-8
+    pcall(drawVLine)
     
     kld(hl, RubikLines)
     ld b, 21
@@ -124,9 +139,7 @@ MaskPatternLoop:
 
     pcall(fastCopy)
 
-    push hl \ ld hl, 250 \ pcall(sleep) \ pop hl
-
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;SLEEP HERE
+    push hl \ ld hl, 500 \ pcall(sleep) \ pop hl
     
     ld d, 0         ;d contains the two previous keypresses
                     ;$37 means 3 and 7 were pressed
@@ -1003,6 +1016,26 @@ RubikLines:
     .db 65,63-33,75,63-45
     .db 65,63-17,74,63-31
     .db 64,63-1,74,63-22
+
+CastleIcon:
+    .db %11111111
+    .db %00000001
+    .db %01010101
+    .db %00000001
+    .db %01010101
+    .db %00000001
+    .db %01010101
+    .db %00000001
+
+ThreadsIcon:
+    .db %11111111
+    .db %00000000
+    .db %01011110
+    .db %00000000
+    .db %01011110
+    .db %00000000
+    .db %01011110
+    .db %00000000
 
 saferam1:
     .fill 256
