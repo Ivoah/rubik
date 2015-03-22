@@ -1,4 +1,4 @@
 .knightos/
 bin/
-ref/
+#ref/
 *.pkg
