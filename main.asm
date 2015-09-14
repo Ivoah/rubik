@@ -9,7 +9,7 @@
     .dw name
     .db KEXC_HEADER_END
 name:
-    .db "Rubik's Cube",0
+    .db "Rubik's Cube",0 ;' <- fix syntax hilighting
 corelib_path:
     .db "/lib/core",0
 start:
@@ -40,11 +40,11 @@ MainLoop:
     ld a, 96-9
     ld l, 64-8
     pcall(drawVLine)
-    
+
     kld(hl, RubikLines)
     ld b, 21
 
-SkeletonLoop:   
+SkeletonLoop:
     push bc
         ld b, (hl)
         inc hl
@@ -64,12 +64,12 @@ SkeletonLoop:
     ld b, 27
     kld(hl, DisplayedSquares)
 
-DrawColorsLoop:     
+DrawColorsLoop:
     push bc
     ld e, (hl)
     inc hl
     ld d, (hl)
-    inc hl  
+    inc hl
     push hl
 
     push bc \ push hl
@@ -78,7 +78,7 @@ DrawColorsLoop:
     pop hl \ pop bc
 
     push de
-    
+
     xor a
 
     ld c, b
@@ -140,7 +140,7 @@ MaskPatternLoop:
     pcall(fastCopy)
 
     push hl \ ld hl, 500 \ pcall(sleep) \ pop hl
-    
+
     ld d, 0         ;d contains the two previous keypresses
                     ;$37 means 3 and 7 were pressed
 
@@ -183,10 +183,10 @@ KeyLoop:
     cp k7
     kjp(z, Seven)
 
-    cp kMode
+    cp kClear
     kjp(z, ResetCube)
 
-    cp kClear
+    cp kMode
     jr nz, KeyLoop
 
     pop hl
@@ -394,7 +394,7 @@ ApplyOperation:
     ldir
 
     pop hl
-    
+
     ld b, 55
     kld(de, CubePosition)
 
